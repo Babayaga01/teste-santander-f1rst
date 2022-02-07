@@ -1,6 +1,5 @@
 package com.f1rst.santander.contas.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

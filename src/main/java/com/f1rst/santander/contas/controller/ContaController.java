@@ -24,7 +24,7 @@ public class ContaController {
 
          Conta contaObj = contaService.findByConta(conta);
 
-        return new ResponseContaDTO(contaObj); //contaObj
+        return new ResponseContaDTO(contaObj);
     }
 
 }

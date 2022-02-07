@@ -24,7 +24,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED) // retorna codigo http 201, seguindo padrão de verbos http
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseDTO create(@RequestBody @Valid ClienteDTO clienteDTO) {
         return clienteService.create(clienteDTO);
 
@@ -52,9 +52,10 @@ public class ClienteController {
         clienteService.deleteById(id);
     }
 
-    @GetMapping("/full")
-    public void getClienteConta(){
+    @GetMapping("/gerarContas")
+    public String getClienteConta(){
         clienteService.gerarContas();
+        return "Contas Geradas";
     }
 
 

@@ -29,7 +29,7 @@ public class Conta {
     @Column
     private Double limite_cartao;
 
-   // @Column
+
     @OneToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
