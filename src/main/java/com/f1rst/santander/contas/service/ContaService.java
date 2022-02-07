@@ -89,11 +89,19 @@ public class ContaService {
 
  //   }
 
+    public Optional<Conta> findByClienteId(Long id) {
+
+        return contaRepository.findByClienteId(id);
+    }
+
+
     public Conta findByConta(String numConta) throws IdNotFoundException {
 
-           Conta conta = existe_conta(numConta);
+           //Conta conta = existe_conta(numConta);
 
-           return (conta);
+           //return (conta);
+
+        return contaRepository.findByNumConta(numConta).get();
     }
 
     private Conta existe_conta(Long id) throws IdNotFoundException {

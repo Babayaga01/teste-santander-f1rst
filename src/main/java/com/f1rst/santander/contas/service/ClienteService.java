@@ -35,10 +35,15 @@ public class ClienteService {
         Cliente clienteToSave = clienteMapper.toEntity(clienteDTO);
         Cliente clienteSalvo = clienteRepository.save(clienteToSave);
 
-        Conta conta = contaService.createConta(clienteSalvo);
-        clienteSalvo.setConta(conta);
-        clienteSalvo = clienteRepository.save(clienteToSave);
-        return responseDTO(clienteSalvo.getId_cliente(), "Cliente criado com o ID: ");
+        if(contaService.findByClienteId(clienteSalvo.getId()).isEmpty()){
+
+            Conta conta = contaService.createConta(clienteSalvo);
+            clienteSalvo.setConta(conta);
+            clienteSalvo = clienteRepository.save(clienteToSave);
+
+        }
+
+        return responseDTO(clienteSalvo.getId(), "Cliente criado com o ID: ");
     }
 
     public ClienteDTO findById(Long id) throws IdNotFoundException {
@@ -59,10 +64,13 @@ public class ClienteService {
 
     public void gerarContas(){
         List<Cliente> clientes = findAll_2();
+
         for (Cliente cliente:clientes) {
-            Conta conta = contaService.createConta(cliente);
-            cliente.setConta(conta);
-            cliente = clienteRepository.save(cliente);
+            if(contaService.findByClienteId(cliente.getId()).isEmpty()) {
+                Conta conta = contaService.createConta(cliente);
+                cliente.setConta(conta);
+                cliente = clienteRepository.save(cliente);
+            }
         }
     }
 
@@ -77,7 +85,7 @@ public class ClienteService {
         Cliente clienteToUpdate = clienteMapper.toEntity(clienteDTO);
         Cliente updatedCliente = clienteRepository.save(clienteToUpdate);
 
-        return responseDTO(updatedCliente.getId_cliente(), "Cliente atualizado com o ID ");
+        return responseDTO(updatedCliente.getId(), "Cliente atualizado com o ID ");
     }
 
     private ResponseDTO responseDTO(Long id, String msg){

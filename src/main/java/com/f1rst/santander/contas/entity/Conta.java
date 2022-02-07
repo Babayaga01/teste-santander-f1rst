@@ -20,7 +20,7 @@ public class Conta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_conta;
 
-    @Column//(unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String numConta;
 
     @Column

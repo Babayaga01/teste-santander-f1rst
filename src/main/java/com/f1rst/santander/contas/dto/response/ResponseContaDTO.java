@@ -1,11 +1,10 @@
 package com.f1rst.santander.contas.dto.response;
 
-import com.f1rst.santander.contas.dto.request.ContaDTO;
 import com.f1rst.santander.contas.entity.Conta;
 import com.f1rst.santander.contas.utils.CalculoCredito;
+import lombok.Data;
 
-import java.util.List;
-
+@Data
 public class ResponseContaDTO {
 
     private String nome;
@@ -25,16 +24,5 @@ public class ResponseContaDTO {
         this.conta = conta.getNumConta();
         this.limiteCredito = CalculoCredito.calculo(conta.getCliente().getSalario());
     }
-
-    public ResponseContaDTO(List<ContaDTO> contas) {
-        for(ContaDTO conta:contas) {
-            this.nome = conta.getCliente().getNome();
-            this.salario = conta.getCliente().getSalario();
-            this.agencia = conta.getAgencia();
-            this.conta = conta.getNumConta();
-            this.limiteCredito = CalculoCredito.calculo(conta.getCliente().getSalario());
-        }
-    }
-
 
 }
